@@ -176,3 +176,40 @@ export interface StrategyGuide {
     actionableTactic: string;
   }[];
 }
+
+// ==============================================================================
+// FIREBASE FIRESTORE DATA MODELS
+// ==============================================================================
+
+export interface UserProfile {
+  uid: string;
+  displayName: string;
+  email: string;
+  phone?: string;
+  photoURL?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface GymMember {
+  id?: string; // Firestore document ID
+  ownerId: string; // Firebase Auth UID of owner
+  name: string;
+  email: string;
+  phone: string;
+  membershipPlan: 'Standard Access' | 'Performance Elite' | 'VIP Private Studio' | 'Custom Athletic Pass';
+  status: 'Active' | 'Pending Renewal' | 'Frozen' | 'Trial';
+  startDate: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LiveAnnouncement {
+  id?: string; // Firestore document ID
+  title: string;
+  message: string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+

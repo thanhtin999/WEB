@@ -1,0 +1,212 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =========================================================
+    // HELPER FUNCTIONS
+    // =========================================================
+
+    // Kiểm tra người dùng đã đăng nhập (User is authenticated)
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Kiểm tra đúng chủ sở hữu tài khoản (User owns this document)
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Admin thông qua Firebase Auth Custom Claims:
+    // admin: true
+    function isAdmin() {
+      return isSignedIn()
+        && request.auth.token.admin == true;
+    }
+
+
+    // =========================================================
+    // 1. USERS
+    // users/{userId}
+    //
+    // Dữ liệu hồ sơ riêng tư của từng người dùng.
+    // Người dùng chỉ được đọc / sửa profile của chính mình.
+    // =========================================================
+
+    match /users/{userId} {
+
+      // Chỉ chủ tài khoản hoặc admin được đọc
+      allow read: if isOwner(userId) || isAdmin();
+
+      // Tạo profile
+      allow create: if isOwner(userId)
+        && request.resource.data.keys().hasOnly([
+          'uid',
+          'displayName',
+          'email',
+          'phone',
+          'photoURL',
+          'createdAt',
+          'updatedAt'
+        ])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.email == request.auth.token.email;
+
+      // Cập nhật profile
+      allow update: if (
+          isOwner(userId)
+
+          // Không cho user đổi uid
+          && request.resource.data.uid == resource.data.uid
+
+          // Không cho user tự thêm field admin/role/isAdmin
+          && request.resource.data.keys().hasOnly([
+            'uid',
+            'displayName',
+            'email',
+            'phone',
+            'photoURL',
+            'createdAt',
+            'updatedAt'
+          ])
+        )
+        || isAdmin();
+
+      // User có thể xóa profile của mình.
+      // Admin cũng có thể xóa.
+      allow delete: if isOwner(userId) || isAdmin();
+    }
+
+
+    // =========================================================
+    // 2. GYM MEMBERS
+    // gymMembers/{docId}
+    //
+    // Dữ liệu membership của phòng gym.
+    //
+    // ownerId = Firebase UID của người sở hữu dữ liệu.
+    // =========================================================
+
+    match /gymMembers/{docId} {
+
+      // Người dùng chỉ đọc membership của mình.
+      // Admin đọc tất cả.
+      allow read: if isSignedIn()
+        && (
+          resource.data.ownerId == request.auth.uid
+          || isAdmin()
+        );
+
+      // User tạo membership cho chính mình.
+      allow create: if isSignedIn()
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.keys().hasOnly([
+          'ownerId',
+          'name',
+          'email',
+          'phone',
+          'membershipPlan',
+          'status',
+          'startDate',
+          'createdAt',
+          'updatedAt'
+        ]);
+
+      // Người dùng chỉ sửa document của mình
+      // và không được đổi ownerId.
+      allow update: if (
+          isSignedIn()
+          && resource.data.ownerId == request.auth.uid
+          && request.resource.data.ownerId == resource.data.ownerId
+          && request.resource.data.keys().hasOnly([
+            'ownerId',
+            'name',
+            'email',
+            'phone',
+            'membershipPlan',
+            'status',
+            'startDate',
+            'createdAt',
+            'updatedAt'
+          ])
+        )
+        || isAdmin();
+
+      // Chủ sở hữu hoặc admin được xóa
+      allow delete: if (
+          isSignedIn()
+          && resource.data.ownerId == request.auth.uid
+        )
+        || isAdmin();
+    }
+
+
+    // =========================================================
+    // 3. LIVE ANNOUNCEMENTS
+    // liveAnnouncements/{docId}
+    //
+    // Dùng để demo Firestore realtime.
+    //
+    // Ví dụ:
+    // {
+    //   title: "New Class Available",
+    //   message: "HIIT class starts at 7 PM.",
+    //   active: true,
+    //   createdAt: ...
+    // }
+    //
+    // Người dùng được đọc realtime.
+    // CHỈ ADMIN được tạo / sửa / xóa.
+    // =========================================================
+
+    match /liveAnnouncements/{docId} {
+
+      // Đọc thông báo realtime khi đã đăng nhập
+      allow read: if isSignedIn();
+
+      // Chỉ Admin tạo / sửa / xóa thông báo
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasOnly([
+          'title',
+          'message',
+          'active',
+          'createdAt',
+          'updatedAt'
+        ]);
+
+      allow update: if isAdmin();
+
+      allow delete: if isAdmin();
+    }
+
+
+    // =========================================================
+    // 4. PUBLIC CONTENT - OPTIONAL
+    // publicContent/{docId}
+    //
+    // Dùng cho dữ liệu website ai cũng có thể đọc.
+    // Chỉ admin được ghi.
+    // =========================================================
+
+    match /publicContent/{docId} {
+
+      // Website public có thể đọc
+      allow read: if true;
+
+      // Chỉ admin chỉnh sửa
+      allow create, update, delete: if isAdmin();
+    }
+
+
+    // =========================================================
+    // 5. DEFAULT DENY
+    //
+    // Rất quan trọng:
+    // Collection nào chưa định nghĩa phía trên sẽ bị chặn.
+    // =========================================================
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

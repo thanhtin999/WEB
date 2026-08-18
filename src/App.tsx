@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BRAND_PRESETS, getPresetById } from './data/brandPresets';
 import { BrandConfig, ServiceItem, ProjectItem, PricingPlan } from './types';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { BrandSwitcherBar } from './components/BrandSwitcherBar';
 import { HeroSection } from './components/HeroSection';
@@ -19,20 +20,29 @@ import { StrategyGuideModal } from './components/StrategyGuideModal';
 import { CaseStudyModal } from './components/CaseStudyModal';
 import { ServiceDetailModal } from './components/ServiceDetailModal';
 import { CustomBrandEditorModal } from './components/CustomBrandEditorModal';
-import { BookOpen, Calendar, Sparkles } from 'lucide-react';
+import { AuthModal } from './components/AuthModal';
+import { GymMemberDashboard } from './components/GymMemberDashboard';
+import { LiveAnnouncementsBanner } from './components/LiveAnnouncementsBanner';
+import { DemoStepsModal } from './components/DemoStepsModal';
+import { BookOpen, Dumbbell, Video, Radio, Sparkles } from 'lucide-react';
 
-export default function App() {
+function AppContent() {
   const [currentBrand, setCurrentBrand] = useState<BrandConfig>(BRAND_PRESETS[0]);
   
   // Modals state
   const [strategyModalOpen, setStrategyModalOpen] = useState(false);
   const [customBrandModalOpen, setCustomBrandModalOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [dashboardOpen, setDashboardOpen] = useState(false);
+  const [demoStepsOpen, setDemoStepsOpen] = useState(false);
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<ProjectItem | null>(null);
   const [selectedServiceDetail, setSelectedServiceDetail] = useState<ServiceItem | null>(null);
   
   // Pre-selected parameters for lead capture form
   const [preSelectedService, setPreSelectedService] = useState<ServiceItem | null>(null);
   const [preSelectedPlan, setPreSelectedPlan] = useState<PricingPlan | null>(null);
+
+  const { user, profile } = useAuth();
 
   const handleSelectPreset = (presetId: string) => {
     const preset = getPresetById(presetId);
@@ -62,6 +72,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-slate-900 selection:text-white flex flex-col font-sans">
+      {/* 0. Real-time Gym Announcement & Sync Header Banner */}
+      <LiveAnnouncementsBanner
+        onOpenDashboard={() => setDashboardOpen(true)}
+        onOpenAuth={() => setAuthModalOpen(true)}
+      />
+
       {/* 1. Top Live Preset & Customizer Bar */}
       <BrandSwitcherBar
         currentBrandId={currentBrand.id}
@@ -75,6 +91,9 @@ export default function App() {
         brand={currentBrand}
         onOpenStrategyGuide={() => setStrategyModalOpen(true)}
         onOpenCustomBrandEditor={() => setCustomBrandModalOpen(true)}
+        onOpenDashboard={() => setDashboardOpen(true)}
+        onOpenAuth={() => setAuthModalOpen(true)}
+        onOpenDemoSteps={() => setDemoStepsOpen(true)}
         onScrollToSection={handleScrollToSection}
       />
 
@@ -188,18 +207,58 @@ export default function App() {
         onResetToPreset={() => setCurrentBrand(BRAND_PRESETS[0])}
       />
 
-      {/* Floating Strategy Quick-Access Pill (Bottom Left) */}
+      {/* Firebase Authentication Modal (Sign In / Register / 1-Click Demo) */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        onSuccess={() => setDashboardOpen(true)}
+      />
+
+      {/* Gym Member Portal & Cloud Firestore Realtime Management */}
+      <GymMemberDashboard
+        isOpen={dashboardOpen}
+        onClose={() => setDashboardOpen(false)}
+        onOpenAuth={() => setAuthModalOpen(true)}
+        onOpenDemoSteps={() => setDemoStepsOpen(true)}
+      />
+
+      {/* YouTube Tutorial Demo Walkthrough Guide Modal */}
+      <DemoStepsModal
+        isOpen={demoStepsOpen}
+        onClose={() => setDemoStepsOpen(false)}
+        onOpenAuth={() => setAuthModalOpen(true)}
+        onOpenDashboard={() => setDashboardOpen(true)}
+      />
+
+      {/* Floating Action Controls (Bottom Left & Right) */}
       <div className="fixed bottom-5 left-5 z-30 hidden sm:flex items-center gap-2">
         <button
-          onClick={() => setStrategyModalOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/90 text-slate-800 border border-slate-200/80 backdrop-blur-xl shadow-lg hover:bg-slate-50 hover:border-slate-300 text-xs font-semibold transition-all group"
-          title="Open Sitemap, Copywriting & CRO Deliverables"
+          onClick={() => setDashboardOpen(true)}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 text-xs font-bold transition-all group active:scale-95"
+          title="Open Gym Member Portal & Realtime Data"
         >
-          <BookOpen className="w-4 h-4 text-blue-600 group-hover:rotate-12 transition-transform" />
-          <span>Brand Strategy Guide</span>
-          <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+          <Dumbbell className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+          <span>Member Portal</span>
+          <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
+        </button>
+
+        <button
+          onClick={() => setDemoStepsOpen(true)}
+          className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-white/95 text-slate-800 border border-slate-200 backdrop-blur-xl shadow-md hover:bg-slate-50 text-xs font-bold transition-all"
+          title="Open YouTube Demo Walkthrough Steps"
+        >
+          <Video className="w-4 h-4 text-red-600" />
+          <span>YouTube Demo</span>
         </button>
       </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
