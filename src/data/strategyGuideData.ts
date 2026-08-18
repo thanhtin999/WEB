@@ -1,0 +1,208 @@
+import { StrategyGuide } from '../types';
+
+export const STRATEGY_GUIDE_DATA: StrategyGuide = {
+  sitemap: [
+    {
+      section: '01. Navigation & Hero',
+      page: 'Homepage / Above the Fold',
+      purpose: 'Establish immediate brand authority, communicate core value proposition in under 3 seconds, and provide low-friction primary & secondary CTAs.',
+      conversionGoal: 'Direct click-through to Consultation Scheduler or Case Study exploration (>18% target CTR).',
+    },
+    {
+      section: '02. Social Proof & Trust Bar',
+      page: 'Homepage / Social Proof Ribbon',
+      purpose: 'Disarm skepticism by showcasing globally recognizable enterprise clients, verified media features, and industry accreditation.',
+      conversionGoal: 'Establish baseline trust and reduce perceived switching/adoption risk.',
+    },
+    {
+      section: '03. Brand Story & Pillars',
+      page: 'About Section / Narrative',
+      purpose: 'Articulate the founding philosophy, elite team pedigree, mission, and the core 4 technical/operational pillars that justify premium pricing.',
+      conversionGoal: 'Elevate brand status and pre-qualify high-intent enterprise buyers.',
+    },
+    {
+      section: '04. Solutions & Services Bento',
+      page: 'Services / Offer Matrix',
+      purpose: 'Present modular, clearly defined enterprise service offerings with concrete deliverables, timelines, and measurable business ROI.',
+      conversionGoal: 'Micro-conversions via service drawer explorations and targeted inquiry submissions.',
+    },
+    {
+      section: '05. Competitive Advantage Matrix',
+      page: 'Why Choose Us / Differentiator',
+      purpose: 'Highlight the sharp contrast between modern agile principal engineering and bloated legacy agencies with an objective feature matrix.',
+      conversionGoal: 'Address executive objections regarding team quality, speed, pricing transparency, and IP ownership.',
+    },
+    {
+      section: '06. Verified Case Studies',
+      page: 'Showcase / Selected Work',
+      purpose: 'Demonstrate proven track record with hard numerical metrics ($84M revenue impact, 7.8x acceleration, 99.4% satisfaction) and deep challenge-solution breakdowns.',
+      conversionGoal: 'Trigger high-intent project discovery conversations from enterprise peers.',
+    },
+    {
+      section: '07. 4-Stage Methodology',
+      page: 'Process / Engagement Roadmap',
+      purpose: 'Demystify the project journey from initial 10-day diagnostic to zero-downtime launch and IP transfer, setting clear expectations.',
+      conversionGoal: 'Eliminate delivery anxiety and build confidence in project governance.',
+    },
+    {
+      section: '08. Transparent Pricing & Estimator',
+      page: 'Pricing / Investment Tiers',
+      purpose: 'Provide transparent, predictable milestone investment tiers and an interactive ROI calculator for CFO/procurement sign-off.',
+      conversionGoal: 'Pre-qualify budget and accelerate the enterprise sales cycle.',
+    },
+    {
+      section: '09. Objection-Handling FAQ',
+      page: 'FAQ / Risk Reversal',
+      purpose: 'Directly address the 6 most common high-ticket objections (timing, developer seniority, IP rights, legacy systems, post-launch SLAs).',
+      conversionGoal: 'Remove remaining barriers to booking a strategy consultation.',
+    },
+    {
+      section: '10. High-Intent Lead Booking Studio',
+      page: 'Contact / Consultation Scheduler',
+      purpose: 'Multi-step interactive form with budget selectors, project scope checkboxes, date/time slot selection, and immediate confirmation.',
+      conversionGoal: 'Capture qualified lead data and schedule synchronous calendar meetings (>35% form completion).',
+    },
+  ],
+  headlineOptions: [
+    {
+      type: 'Direct Value & Authority (Recommended Default)',
+      headline: 'Engineering High-Performance Digital Platforms & Enterprise AI at Scale',
+      subheadline: 'We partner with visionary leaders to build resilient digital ecosystems, bespoke intelligence infrastructure, and category-defining customer experiences.',
+      bestFor: 'Fortune 500 decision makers, enterprise RFP evaluation, institutional credibility.',
+    },
+    {
+      type: 'Outcome & Speed Driven',
+      headline: 'Enterprise-Grade Software & AI Deployed in Weeks, Not Fiscal Quarters',
+      subheadline: 'Eliminate agency bloat. Access senior principal engineering squads that turn complex operational challenges into compounding commercial assets.',
+      bestFor: 'Fast-scaling scale-ups, private equity portfolio companies, agile corporate innovators.',
+    },
+    {
+      type: 'High-Status / Category King',
+      headline: 'Architecting Digital Supremacy for Industry Leaders',
+      subheadline: 'Where bespoke computational engineering meets Apple-level design craftsmanship. The partner of choice when failure is not an option.',
+      bestFor: 'Luxury brands, private wealth, global flagships, and premium tier positioning.',
+    },
+    {
+      type: 'Problem / Transformation Driven',
+      headline: 'Transforming Legacy Technical Friction into High-Velocity Market Dominance',
+      subheadline: 'Replace fragile monoliths and slow manual workflows with autonomous cloud infrastructure and fine-tuned AI pipelines.',
+      bestFor: 'Enterprises undergoing mission-critical digital modernization.',
+    },
+  ],
+  ctaVariations: [
+    {
+      stage: 'Top of Funnel (Hero / Header)',
+      primaryCta: 'Schedule Strategic Consultation',
+      secondaryCta: 'Explore Verified Case Studies',
+      microcopy: 'Free 30-min executive technical review • No sales pressure • Direct architect dialogue',
+    },
+    {
+      stage: 'Middle of Funnel (Services & Showcase)',
+      primaryCta: 'Inquire About This Service',
+      secondaryCta: 'Download Full Architecture Brief',
+      microcopy: 'Includes detailed scope breakdown, sample SLA contract, and pricing schedule',
+    },
+    {
+      stage: 'Bottom of Funnel (Pricing & Final Lead Capture)',
+      primaryCta: 'Confirm Consultation Slot',
+      secondaryCta: 'Speak Directly with Managing Partner',
+      microcopy: 'Guaranteed 4-hour NDA execution • Instant calendar invite • SOC 2 compliant storage',
+    },
+  ],
+  positioningStatement: {
+    forTarget: 'For enterprise executives, founders, and technology leaders seeking category leadership,',
+    whoNeed: 'who need mission-critical digital platforms, resilient cloud architectures, and bespoke AI pipelines deployed without the sluggish overhead of legacy consultancies,',
+    ourBrand: 'LUMINA is the world-class digital engineering and innovation partner',
+    thatProvides: 'that delivers senior-squad execution, guaranteed performance SLAs, and turnkey IP ownership at 3.4x the speed of traditional firms.',
+    unlike: 'Unlike traditional big-4 consultancies that rely on junior offshore billing traps or creative shops without engineering depth,',
+    ourDifferentiator: 'LUMINA pairs veteran Silicon Valley principal architects with museum-grade aesthetic craftsmanship to guarantee measurable commercial ROI.',
+  },
+  seoData: {
+    titleTag: 'Lumina Prestige | High-Performance Enterprise Digital Systems & AI Strategy',
+    metaDescription: 'Partner with Lumina to build resilient cloud platforms, bespoke enterprise AI pipelines, and high-converting digital products. 100% senior architects, guaranteed SLAs.',
+    primaryKeywords: ['enterprise digital transformation', 'bespoke AI architecture', 'custom enterprise software', 'high performance cloud engineering', 'executive technology advisory'],
+    secondaryKeywords: ['headless commerce architecture', 'vector AI pipelines', 'fintech platform development', 'SOC2 compliant web applications', 'principal engineer consulting'],
+    ogTitle: 'Lumina Prestige — Architecting Digital Supremacy for Industry Leaders',
+    ogDescription: 'Discover how Fortune 500 enterprises and hyper-growth scaleups achieve 3.4x faster time-to-market with Lumina.',
+  },
+  visualStyleGuide: {
+    colorPalette: [
+      { role: 'Base Background', hex: '#0a0a0c', name: 'Deep Obsidian' },
+      { role: 'Elevated Surface', hex: '#141418', name: 'Charcoal Glass' },
+      { role: 'Primary Accent', hex: '#d97706', name: 'Imperial Amber' },
+      { role: 'Secondary Accent', hex: '#f59e0b', name: 'Golden Glow' },
+      { role: 'High-Contrast Text', hex: '#f5f5f7', name: 'Off-White Silk' },
+      { role: 'Subdued Text', hex: '#a1a1aa', name: 'Muted Zinc' },
+      { role: 'Border & Divider', hex: 'rgba(255,255,255,0.08)', name: 'Hairline Frost' },
+    ],
+    typography: [
+      { type: 'Display / Headings', font: 'Outfit / Plus Jakarta Sans', usage: 'Bold, tight tracking (-0.025em), mathematical scale ratio 1.33' },
+      { type: 'Editorial / Luxury Highlights', font: 'Playfair Display (Serif)', usage: 'Selective italic accents for emotional prestige and craftsmanship quotes' },
+      { type: 'Body & Technical UI', font: 'Plus Jakarta Sans', usage: '16px base, 1.6 line height, clean geometric legibility across all densities' },
+    ],
+    imageDirection: 'Authentic architectural spaces, modern high-tech research centers, executive collaborative workspaces, and ray-traced spatial renders with deep moody contrast, warm rim lighting, and zero generic stock clichés.',
+    iconStyle: 'Minimalist 1.5px stroke Lucide vector icons enclosed in glass badges with subtle amber hover glows.',
+  },
+  croRecommendations: [
+    {
+      number: 1,
+      title: 'Eliminate Form Friction with Progressive Multi-Step Disclosure',
+      rationale: 'Asking for too much information at once increases cognitive abandonment. Breaking inquiries into 3 bite-sized steps (Scope -> Timeline -> Contact) increases completion rates by up to 48%.',
+      actionableTactic: 'Implemented in the bottom Lead Capture section with live progress indicators and interactive chip selectors.',
+    },
+    {
+      number: 2,
+      title: 'Anchor High-Ticket Authority with Real Quantified Metrics',
+      rationale: 'Vague claims like "we build fast websites" are unconvincing to C-suite buyers. Numbers like "$4.2B+ client revenue", "3.4x speed", and " sub-40ms latency" prove institutional competence.',
+      actionableTactic: 'Prominently displayed in the Hero trust bar, About stats counters, and Case Study cards.',
+    },
+    {
+      number: 3,
+      title: 'Address Price & Risk Skepticism with Direct Comparison Tables',
+      rationale: 'Enterprise buyers fear opaque hourly billable creep and junior bait-and-switch handoffs. An objective comparison matrix neutralizes competitor pitches immediately.',
+      actionableTactic: 'Included in the "Why Choose Us" section with side-by-side criteria against traditional agency models.',
+    },
+    {
+      number: 4,
+      title: 'Deploy Dual Action CTAs for Segmented Buyer Intent',
+      rationale: 'High-intent buyers want an immediate consultation slot, while research-phase buyers want to inspect case study proof without committing to a call.',
+      actionableTactic: 'Paired primary "Schedule Strategy Call" with secondary "Explore Case Studies" across the hero and sticky navigation bar.',
+    },
+    {
+      number: 5,
+      title: 'Implement Interactive Pricing & ROI Estimation Sliders',
+      rationale: 'Providing an immediate ballpark estimator filters out unqualified budget leads while giving serious decision-makers the internal ROI data needed to win CFO approval.',
+      actionableTactic: 'Interactive budget and team squad slider in the Pricing section with dynamic ROI multiplier calculations.',
+    },
+    {
+      number: 6,
+      title: 'Leverage High-Trust Microcopy Beneath Every Primary Button',
+      rationale: 'Placing reassuring microcopy ("Guaranteed 4-hour NDA execution • Direct principal dialogue • Zero obligation") directly under CTA buttons eliminates final hesitation.',
+      actionableTactic: 'Rendered beneath every primary button throughout the application.',
+    },
+    {
+      number: 7,
+      title: 'Deepen Social Proof with Verifiable Executive Avatars & Badges',
+      rationale: 'Anonymous testimonials carry zero credibility. Full names, verified C-level roles, real enterprise logos, and quantifiable impact metrics establish ironclad authenticity.',
+      actionableTactic: 'Featured in the Testimonials grid with industry category filter tags and verified badge icons.',
+    },
+    {
+      number: 8,
+      title: 'Provide a Dedicated Strategy & Brand Blueprint Drawer',
+      rationale: 'Demonstrates extreme transparency, strategic depth, and immediate actionable value to prospective clients before any commercial transaction.',
+      actionableTactic: 'Accessible via the top bar "Strategy & Copywriting Guide" modal with 1-click clipboard copying.',
+    },
+    {
+      number: 9,
+      title: 'Ensure Sub-Second Global Edge Performance',
+      rationale: 'Every 100ms of delay in luxury and enterprise web applications costs 7% in conversion dropoff. Smooth GPU-accelerated transitions reinforce the feeling of elite craftsmanship.',
+      actionableTactic: 'Optimized Tailwind v4 bundle, vector icons, and lightweight Framer Motion animations.',
+    },
+    {
+      number: 10,
+      title: 'Instant Confirmation & Confetti Micro-Reward',
+      rationale: 'A rewarding micro-interaction upon form completion reinforces positive brand sentiment and assures the user their inquiry was logged with priority SLA.',
+      actionableTactic: 'Integrated canvas-confetti celebration and automated calendar invite download simulation upon booking.',
+    },
+  ],
+};
